@@ -3,6 +3,8 @@ class window.Hand extends Backbone.Collection
   model: Card
 
   initialize: (array, @deck, @isDealer, @standing, @isBust = false) ->
+    if array[0].rankName == array[1].rankName
+      trigger('splittable', @)
 
   hit: ->
     @add(@deck.pop()).last()
@@ -13,6 +15,9 @@ class window.Hand extends Backbone.Collection
   stand: ->
     @standing = true
     @trigger('stand', this)
+
+  split: ->
+
 
   scores: ->
     # The scores are an array of potential scores.
